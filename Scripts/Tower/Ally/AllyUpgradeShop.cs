@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class AllyUpgradeShop : MonoBehaviour
 {
+    [SerializeField] private AllyParent _parent;
+
     public void StartListen(ImperfectAlly ally)
     {
         if (ally == null)
@@ -30,7 +32,7 @@ public class AllyUpgradeShop : MonoBehaviour
             throw new ArgumentNullException(nameof(toPrefab));
 
         StopListen(from);
-        var to = Instantiate(toPrefab, from.Position, Quaternion.identity);
+        var to = _parent.Get(toPrefab, from.Position);
 
         from.FailUpgrade += OnFailUpgrade;
         from.Upgrade += OnUpgrade;
@@ -48,7 +50,7 @@ public class AllyUpgradeShop : MonoBehaviour
 
         from.FailUpgrade -= OnFailUpgrade;
         from.Upgrade -= OnUpgrade;
-        Destroy(toSuspect.gameObject);
+        _parent.Put(toSuspect);
         StartListen(from);
     }
 
@@ -62,7 +64,7 @@ public class AllyUpgradeShop : MonoBehaviour
 
         from.FailUpgrade -= OnFailUpgrade;
         from.Upgrade -= OnUpgrade;
-        Destroy(from.gameObject);
+        _parent.Put(from);
         StartListen(toSuspect);
         toSuspect.Active();
     }

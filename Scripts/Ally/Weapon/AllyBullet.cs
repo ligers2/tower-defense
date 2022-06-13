@@ -2,14 +2,16 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Transform))]
+[RequireComponent(typeof (Rigidbody))]
 public class AllyBullet : MonoBehaviour
 {
     [SerializeField] private float _speed = 4f;
     [SerializeField] private float _startDamage = 100f;
     [SerializeField] private float _aliveSeconds = 5f;
 
-    [SerializeField] private Rigidbody _rigidbody = null;
+    public event Action<AllyBullet> Dead;
 
+    private Rigidbody _rigidbody;
     private Vector3 _direction;
     private Damage _damage;
     private float _expiredSeconds;
@@ -24,6 +26,7 @@ public class AllyBullet : MonoBehaviour
 
     private void Awake()
     {
+        _rigidbody = GetComponent<Rigidbody>();
         _damage = new Damage(_startDamage);
     }
 
@@ -35,7 +38,7 @@ public class AllyBullet : MonoBehaviour
         if (_expiredSeconds >= _aliveSeconds)
         {
             _expiredSeconds = 0;
-            Destroy(gameObject);
+            Dead?.Invoke(this);
         }
     }
 

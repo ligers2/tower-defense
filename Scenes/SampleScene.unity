@@ -1012,6 +1012,7 @@ GameObject:
   - component: {fileID: 1601221936}
   - component: {fileID: 1601221935}
   - component: {fileID: 1601221934}
+  - component: {fileID: 1601221938}
   m_Layer: 0
   m_Name: Tower
   m_TagString: Untagged
@@ -1050,6 +1051,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15b320fcb27aa98479ac111070607ea6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bulletParent: {fileID: 1601221938}
 --- !u!114 &1601221928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1420,6 +1422,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6eb4b02098b0f0548a3ce1d39794cb70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _parent: {fileID: 1601221927}
 --- !u!114 &1601221935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1468,3 +1471,15 @@ MonoBehaviour:
   _secondsDelay: 0.6
   _position: {x: -10, y: 0.75, z: 0}
   _parent: {fileID: 1601221928}
+--- !u!114 &1601221938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1601221925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0c047a90b2f03f4a8dd497ef1713510, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -9,6 +9,8 @@ public class AllyWeapon : MonoBehaviour
     [SerializeField] private AllyDetectArea _area = null;
     [SerializeField] private AllyBullet _bullet = null;
 
+    public event Action<AllyBullet, Vector3, Vector3> WishedFire;
+
     private float _expiredSeconds;
     private bool _active;
 
@@ -21,7 +23,7 @@ public class AllyWeapon : MonoBehaviour
         if (_expiredSeconds >= _secondsDelay && _area.NotEmpty)
         {
             _expiredSeconds = 0;
-            Fire();
+            WishedFire?.Invoke(_bullet, transform.position, _area.First().Position);
         }
     }
 
@@ -31,12 +33,6 @@ public class AllyWeapon : MonoBehaviour
             throw new InvalidOperationException(nameof(Active));
 
         _active = true;
-    }
-
-    private void Fire()
-    {
-        var bullet = Instantiate(_bullet, transform.position, Quaternion.identity);
-        bullet.Init(_area.First().Position);
     }
 }
 

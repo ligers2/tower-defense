@@ -34,6 +34,12 @@ public class Ally : MonoBehaviour
         remove => _placePhysics.FailPlaced -= value;
     }
 
+    public event Action<AllyBullet, Vector3, Vector3> WishedFire
+    {
+        add => _weapon.WishedFire += value;
+        remove => _weapon.WishedFire -= value;
+    }
+
     protected virtual void Awake()
     { 
         var rigidbody = GetComponent<Rigidbody>();
